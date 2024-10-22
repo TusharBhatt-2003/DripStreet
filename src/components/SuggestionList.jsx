@@ -2,7 +2,7 @@
 import React from 'react';
 import ItemCard from './ItemCard'; // Ensure this path is correct
 import menData from '../data/menData'; // Import men data
-import womenData from '../data/womenData'; // Import women data
+import womenData from '../data/womendata';
 
 const SuggestionList = ({ numSuggestions = 10 }) => {
     // Combine both men and women data into one array
