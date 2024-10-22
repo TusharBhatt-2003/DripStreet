@@ -1,9 +1,9 @@
 // Women.jsx
 import { useState } from 'react';
-import ItemCard from '../components/ItemCard';
 import CategoriesList from '../components/CategoriesList';
 import { getUniqueCategories } from '../utils';
 import womenData from '../data/womendata';
+import ItemCard from '../components/ItemCard';
 
 const Women = () => {
     const categories = getUniqueCategories(womenData);
