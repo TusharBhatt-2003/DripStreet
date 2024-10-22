@@ -3,8 +3,8 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import menData from '../data/menData';
-import womenData from '../data/womenData';
 import SuggestionList from '../components/SuggestionList';
+import womenData from '../data/womendata';
 
 const ItemPage = () => {
     const { id } = useParams(); // Get the item ID from the URL
