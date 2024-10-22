@@ -3,9 +3,8 @@ import React from 'react';
 import ItemCard from './ItemCard'; // Ensure this path is correct
 import menData from '../data/menData'; // Import men data
 import womenData from '../data/womendata';
-womenData
 
-const SuggestionList = ({ numSuggestions = 10, excludedItems = [] }) => {
+const SuggestionList = ({ numSuggestions = 100, excludedItems = [] }) => {
     // Combine both men and women data into one array
     const allItems = [...menData, ...womenData];
 

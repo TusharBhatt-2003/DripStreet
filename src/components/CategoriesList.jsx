@@ -9,8 +9,8 @@ const CategoriesList = ({ categories, onSelectCategory, selectedCategory }) => {
                     key={category}
                     className={`px-2 py-1 rounded transition duration-300 ${
                         selectedCategory === category
-                            ? 'bg-blue-500 text-white'
-                            : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
+                            ? 'bg-zinc-700 text-white'
+                            : 'bg-zinc-200 text-gray-800 hover:bg-zinc-300'
                     }`}
                     onClick={() => onSelectCategory(category)}
                 >

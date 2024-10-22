@@ -1,14 +1,19 @@
 // src/components/ItemPage.jsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
-import menData from '../data/menData'; // Ensure this path is correct
+import menData from '../data/menData';
 import SuggestionList from '../components/SuggestionList';
 import womenData from '../data/womendata';
 
 const ItemPage = () => {
     const { id } = useParams(); // Get the item ID from the URL
     const { dispatch } = useCart();
+
+    // Scroll to the top of the page when the component mounts
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     // Find the item in both men's and women's data
     const menItem = menData.find(item => item.id === parseInt(id));
@@ -51,7 +56,7 @@ const ItemPage = () => {
                             {item.itemsInStock > 0 ? `${item.itemsInStock} in stock` : 'Out of stock'}
                         </p>
                         <button
-                            className={`mt-4 w-full px-4 py-2 text-white rounded ${item.itemsInStock > 0 ? 'bg-blue-500 hover:bg-blue-600' : 'bg-gray-400 cursor-not-allowed'}`}
+                            className={`mt-4 w-full px-4 py-2 text-white rounded ${item.itemsInStock > 0 ? 'bg-black hover:bg-zinc-700' : 'bg-gray-400 cursor-not-allowed'}`}
                             onClick={item.itemsInStock > 0 ? handleAddToCart : null}
                             disabled={item.itemsInStock === 0}
                         >
@@ -71,12 +76,13 @@ const ItemPage = () => {
                                     <p className="text-gray-600">{review.comment}</p>
                                     <p className="text-yellow-500">Rating: {review.rating} ★</p>
                                 </div>
-                            ))}      
+                            ))}
                         </div>
                     )}
                 </div>
             </div>
-            <SuggestionList excludedItems={[item.id]} /> {/* Pass the current item's ID to avoid showing it in suggestions */}
+            <SuggestionList numSuggestions={5} excludedItems={[item.id]} />
+
         </div>
     );
 };
