@@ -2,7 +2,7 @@
 
 const womenData = [
     {
-        id: 1,
+        id: 6,
         itemName: "Floral Dress",
         category: "Dresses",
         color: "Pink",
@@ -13,7 +13,7 @@ const womenData = [
         featured: true, // Set this to true for featured items
     },
     {
-        id: 2,
+        id: 7,
         itemName: "High-Waisted Skirt",
         category: "Skirts",
         color: "Brown",
@@ -24,7 +24,7 @@ const womenData = [
         featured: false,
     },
     {
-        id: 3,
+        id: 7,
         itemName: "Leather Handbag",
         category: "Bags",
         color: "Black",
@@ -35,7 +35,7 @@ const womenData = [
         featured: false,
     },
     {
-        id: 4,
+        id: 9,
         itemName: "Sporty Sneakers",
         category: "Shoes",
         color: "White",
@@ -46,7 +46,7 @@ const womenData = [
         featured: false,
     },
     {
-        id: 5,
+        id: 10,
         itemName: "Chic Blazer",
         category: "Outerwear",
         color: "Green",
