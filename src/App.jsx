@@ -1,21 +1,26 @@
-// App.jsx
+// src/App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from './components/Header'; // Ensure you have Header imported
-import Home from './pages/Home';     // Import the new Home component
+import Home from './pages/Home';
 import Men from './pages/Men';
 import Women from './pages/Women';
+import Cart from './pages/Cart'; // Import the Cart component
+import Header from './components/Header';
+import { CartProvider } from './context/CartContext';
 
 const App = () => {
     return (
-        <Router>
-            <Header /> {/* Include the Header */}
-            <Routes>
-                <Route path="/" element={<Home />} /> {/* Set Home as the default route */}
-                <Route path="/men" element={<Men />} />
-                <Route path="/women" element={<Women />} />
-            </Routes>
-        </Router>
+        <CartProvider>
+            <Router>
+                <Header />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/men" element={<Men />} />
+                    <Route path="/women" element={<Women />} />
+                    <Route path="/cart" element={<Cart />} /> {/* Cart route */}
+                </Routes>
+            </Router>
+        </CartProvider>
     );
 };
 

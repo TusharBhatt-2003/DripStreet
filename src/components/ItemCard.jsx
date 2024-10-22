@@ -1,12 +1,14 @@
 // src/components/ItemCard.jsx
 import React from 'react';
+import { useCart } from '../context/CartContext';
 
 const ItemCard = ({ item }) => {
     const { itemName, price, imageUrl, itemsInStock } = item;
+    const { dispatch } = useCart(); // Access the dispatch method from the CartContext
 
     const handleAddToCart = () => {
-        // Placeholder for add to cart functionality
-        alert(`${itemName} has been added to your cart!`);
+        dispatch({ type: 'ADD_ITEM', payload: item }); // Dispatch the add item action
+        // alert(`${itemName} has been added to your cart!`); // Placeholder alert for user feedback
     };
 
     return (
