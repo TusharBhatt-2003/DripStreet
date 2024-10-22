@@ -13,39 +13,6 @@ const menData = [
         featured: true, // Set this to true for featured items
     },
     {
-        id: 1,
-        itemName: "Classic T-Shirt",
-        category: "T-Shirts",
-        color: "Off White",
-        price: 19.99,
-        itemsInStock: 50,
-        itemDesc: "Over size T shirt made from 100% cotton. Comfortable and stylish.",
-        imageUrl: "https://i.pinimg.com/736x/9f/22/a7/9f22a790fd5e8283fcfb5249695cf7ea.jpg",
-        featured: true, // Set this to true for featured items
-    },
-    {
-        id: 1,
-        itemName: "Classic T-Shirt",
-        category: "T-Shirts",
-        color: "Off White",
-        price: 19.99,
-        itemsInStock: 50,
-        itemDesc: "Over size T shirt made from 100% cotton. Comfortable and stylish.",
-        imageUrl: "https://i.pinimg.com/736x/9f/22/a7/9f22a790fd5e8283fcfb5249695cf7ea.jpg",
-        featured: true, // Set this to true for featured items
-    },
-    {
-        id: 1,
-        itemName: "Classic T-Shirt",
-        category: "T-Shirts",
-        color: "Off White",
-        price: 19.99,
-        itemsInStock: 50,
-        itemDesc: "Over size T shirt made from 100% cotton. Comfortable and stylish.",
-        imageUrl: "https://i.pinimg.com/736x/9f/22/a7/9f22a790fd5e8283fcfb5249695cf7ea.jpg",
-        featured: true, // Set this to true for featured items
-    },
-    {
         id: 2,
         itemName: "Baggy Jeans",
         category: "Pants",
