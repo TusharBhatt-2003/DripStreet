@@ -2,7 +2,7 @@
 import React from 'react';
 import ItemCard from './ItemCard';
 import menData from '../data/menData';
-import womenData from '../data/womenData';
+import womenData from '../data/womendata';
 
 const FeaturedItems = () => {
     // Filter featured items from men and women data
