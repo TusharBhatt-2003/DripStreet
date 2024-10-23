@@ -18,7 +18,7 @@ const ItemCard = ({ item }) => {
             >
                 <img src={imageUrl} alt={itemName} className="w-full h-64 rounded-3xl object-cover" />
                 <div className="p-4">
-                    <h3 className="text-sm md:text-[0.92rem] lg:text-lg font-semibold mb-2">{itemName}</h3>
+                    <h3 className="text-sm md:text-[0.92rem] lg:text-base font-semibold mb-2">{itemName}</h3>
                     <p className="text-gray-700 mb-2">Price: ${price.toFixed(2)}</p>
                     <p className={`text-sm ${itemsInStock > 0 ? 'text-green-600' : 'text-red-600'}`}>
                         {itemsInStock > 0 ? `${itemsInStock} in stock` : 'Out of stock'}
