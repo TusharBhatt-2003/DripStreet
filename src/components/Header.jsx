@@ -18,7 +18,7 @@ const Header = () => {
                 <div className="text-black text-lg font-extrabold">
                     <Link to="/">DripStreet</Link>
                 </div>
-                <div className='flex justify-center items-center'>
+                <div className='flex justify-center items-center w-1/3'>
                   <Search /> {/* Add the search component here */}
                 </div>
                 {/* Desktop Menu */}
