@@ -1,28 +1,27 @@
 // src/components/Footer.jsx
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub, faTwitter, faLinkedin, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 const Footer = () => {
     return (
-        <footer className="bg-gray-800 text-white py-6 mt-10">
+        <footer className="bg-black text-[#F2F0E4] py-6 mt-10">
             <div className="container mx-auto text-center">
                 <div className="flex justify-center mb-4">
                     {/* Social Media Links */}
-                    <a href="https://github.com/yourusername" className="mx-3" target="_blank" rel="noopener noreferrer">
-                        <img src="/path-to-your-icons/github.svg" alt="GitHub" className="w-6 h-6 inline" />
+                    <a href="https://github.com/TusharBhatt-2003" className="mx-3" target="_blank" rel="noopener noreferrer">
+                        <FontAwesomeIcon icon={faGithub} className="w-6 h-6" />
                     </a>
-                    <a href="https://twitter.com/yourusername" className="mx-3" target="_blank" rel="noopener noreferrer">
-                        <img src="/path-to-your-icons/twitter.svg" alt="Twitter" className="w-6 h-6 inline" />
+                    <a href="https://www.linkedin.com/in/tushar-bhatt-05b8b11a5/" className="mx-3" target="_blank" rel="noopener noreferrer">
+                        <FontAwesomeIcon icon={faLinkedin} className="w-6 h-6" />
                     </a>
-                    <a href="https://linkedin.com/in/yourusername" className="mx-3" target="_blank" rel="noopener noreferrer">
-                        <img src="/path-to-your-icons/linkedin.svg" alt="LinkedIn" className="w-6 h-6 inline" />
-                    </a>
-                    <a href="https://instagram.com/yourusername" className="mx-3" target="_blank" rel="noopener noreferrer">
-                        <img src="/path-to-your-icons/instagram.svg" alt="Instagram" className="w-6 h-6 inline" />
+                    <a href="https://www.instagram.com/_tush_ar._._/" className="mx-3" target="_blank" rel="noopener noreferrer">
+                        <FontAwesomeIcon icon={faInstagram} className="w-6 h-6" />
                     </a>
                 </div>
                 <p className="mb-2">© {new Date().getFullYear()} Your Name. All rights reserved.</p>
                 <p>
-                    <a href="https://github.com/yourusername/your-repo" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">
+                    <a href="https://github.com/TusharBhatt-2003/DripStreet" target="_blank" rel="noopener noreferrer" className="text-[#F25C05] hover:underline">
                         View Repository
                     </a>
                 </p>

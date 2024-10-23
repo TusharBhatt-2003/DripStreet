@@ -1,11 +1,16 @@
 // src/components/CategoriesList.jsx
-import React from 'react';
+
+import { motion } from 'framer-motion'; // Import Framer Motion
 
 const CategoriesList = ({ categories, onSelectCategory, selectedCategory }) => {
     return (
-        <div className="flex flex-wrap gap-1  mb-6 mx-2">
+        <div 
+          
+        className="flex flex-wrap gap-1  mb-6 mx-2">
             {categories.map((category) => (
-                <button
+                <motion.button                
+                    whileTap={{ scale: 0.5}}
+                    transition={{ type: 'spring', stiffness: 9990 }} // Add a spring transition
                     key={category}
                     className={`px-2 py-1 rounded transition duration-300 ${
                         selectedCategory === category
@@ -15,7 +20,7 @@ const CategoriesList = ({ categories, onSelectCategory, selectedCategory }) => {
                     onClick={() => onSelectCategory(category)}
                 >
                     {category}
-                </button>
+                </motion.button>
             ))}
         </div>
     );

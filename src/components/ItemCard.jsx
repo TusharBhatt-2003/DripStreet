@@ -1,6 +1,7 @@
 // src/components/ItemCard.jsx
 import { Link } from 'react-router-dom'; // Import Link
 import { useCart } from '../context/CartContext';
+import { motion } from 'framer-motion'; // Import Framer Motion
 
 const ItemCard = ({ item }) => {
     const { itemName, price, imageUrl, itemsInStock, id } = item; // Destructure id
@@ -11,7 +12,12 @@ const ItemCard = ({ item }) => {
     };
 
     return (
-        <div className="bg-[#fffdf9] rounded-xl rounded-t-3xl md:m-0 shadow-md overflow-hidden">
+        <motion.div
+            className="bg-[#fffdf9] rounded-xl rounded-t-3xl md:m-0 shadow-md overflow-hidden"
+            whileHover={{ scale: 1.05 }} // Scale up on hover
+            whileTap={{ scale: 0.8}}
+            transition={{ type: 'spring', stiffness: 300 }} // Add a spring transition
+        >
             <Link 
                 to={`/item/${id}`} 
                 onClick={() => window.scrollTo(0, 0)} // Scroll to top on click
@@ -32,7 +38,7 @@ const ItemCard = ({ item }) => {
             >
                 Add to Cart
             </button>
-        </div>
+        </motion.div>
     );
 };
 

@@ -23,7 +23,7 @@ const Home = () => {
     return (
         <div className="flex flex-col items-center justify-start min-h-screen py-10">
             <h1 className="text-4xl font-extrabold mx-2 text-center  mb-4">Welcome to <br /> <span className='silkscreen-regular text-[#F24405]'> DripStreet</span></h1>
-            <p className="text-lg text-gray-700 mx-5 text-center mb-6">Your one-stop shop for the latest fashion trends.</p>
+           
             <div className='h-fit w-[85vw] rounded flex justify-center items-center'>
                 {/* Only show the slideshow on large screens */}
                 <div className="flex flex-col justify-center items-center relative w-[85vw] h-64 overflow-hidden rounded">
@@ -36,8 +36,8 @@ const Home = () => {
                         />
                     ))}
                 </div>
-           
             </div>
+            <p className="text-xl md:text-3xl font-light mt-0 md:mt-5  text-gray-700 mx-5 text-center mb-6">Your one-stop shop for the latest fashion trends.</p>
             <FeaturedItems />
         </div>
     );

@@ -4,6 +4,7 @@ import { useCart } from '../context/CartContext';
 import menData from '../data/menData';
 import womenData from '../data/womendata';
 import SuggestionList from '../components/SuggestionList';
+import { motion } from 'framer-motion'; // Import Framer Motion
 
 const ItemPage = () => {
     const { id } = useParams(); // Get the item ID from the URL
@@ -66,13 +67,15 @@ const ItemPage = () => {
                         <p className={`text-sm mt-2 ${item.itemsInStock > 0 ? 'text-green-600' : 'text-red-600'}`}>
                             {item.itemsInStock > 0 ? `${item.itemsInStock} in stock` : 'Out of stock'}
                         </p>
-                        <button
+                        <motion.button
+                             whileTap={{ scale: 0.9}}
+                             transition={{ type: 'spring', stiffness: 200 }}
                             className={`mt-4 px-4 py-2 text-white rounded ${item.itemsInStock > 0 ? 'bg-black hover:bg-zinc-700' : 'bg-gray-400 cursor-not-allowed'}`}
                             onClick={item.itemsInStock > 0 ? handleAddToCart : null}
                             disabled={item.itemsInStock === 0}
                         >
                             Add to Cart
-                        </button>
+                        </motion.button>
                     </div>
                     <div className="mt-10">
                         <h3 className="text-2xl font-bold">Reviews</h3>
