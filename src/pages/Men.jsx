@@ -14,6 +14,14 @@ const Men = () => {
 
     return (
         <div className="container mx-auto py-10">
+          <style>
+                {`
+                    ::selection {
+                        background: #869EFf;
+                        color: white;
+                    }
+                `}
+            </style>
             <h1 className="text-4xl font-bold mb-6">Men's Clothing</h1>
             <CategoriesList
                 categories={categories}

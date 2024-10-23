@@ -11,3 +11,20 @@
 .scrollbar-hide::-webkit-scrollbar {
     display: none;  /* Safari and Chrome */
 }
+
+/* Global styles for text selection */
+::selection {
+    background: black; /* Default selection background */
+}
+
+/* For items in menData */
+.men-item::selection {
+    background-color: rgba(0, 123, 255, 0.3); /* Light blue for men's items */
+    color: white; /* White text color */
+}
+
+/* For items in womenData */
+.women-item::selection {
+    background-color: rgba(255, 192, 203, 0.5); /* Light pink for women's items */
+    color: black; /* Black text color */
+}

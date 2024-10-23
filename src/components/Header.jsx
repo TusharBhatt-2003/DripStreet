@@ -38,7 +38,7 @@ const Header = () => {
     const menuVariants = {
         hidden: {
             opacity: 0,
-            y: '-10vh', // Start from off-screen (top)
+            y: '-25vh', // Start from off-screen (top)
         },
         visible: {
             opacity: 1,
@@ -52,7 +52,7 @@ const Header = () => {
         },
         exit: {
             opacity: 1,
-            y: '-10vh',
+            y: '-25vh',
             transition: {
                 duration: 0.3,
             },
@@ -69,6 +69,10 @@ const Header = () => {
             opacity: 0,
             x: 200,
         },
+        hiddenUp: {
+            opacity: 0,
+            y: 20,
+        },
         visible: {
             opacity: 1,
             x: 0,
@@ -81,14 +85,14 @@ const Header = () => {
 
     return (
         <motion.header
-            className="sticky top-1 bg-white/30 backdrop-blur-lg px-4 border-2 mt-1 mx-1 border-black rounded-xl z-50"
+            className="sticky top-1 bg-white/30 backdrop-blur-lg px-4 border-2 mt-1 mx-1 border-black rounded-xl z-10 select-none"
             variants={headerVariants} // Apply header variants
             initial="closed" // Set initial state
             animate={menuOpen ? "open" : "closed"} // Animate based on menu state
-            style={{ overflow: 'hidden' }} // Prevent overflow during animation
+            style={{ overflow: '' }} // Prevent overflow during animation
         >
             <div className="container flex justify-between items-center">
-                <div className="text-black text-lg font-extrabold">
+                <div className="text-black text-lg font-extrabold select-none">
                     <Link to="/">DripStreet</Link>
                 </div>
                 <div className='flex justify-center items-center w-1/3'>
@@ -135,12 +139,12 @@ const Header = () => {
                         exit="exit"
                         variants={menuVariants} // Apply the animation variants
                     >
-                        <ul className="flex flex-col items-center space-y-4 bg-white/30 backdrop-blur-3xl p-4 rounded-xl">
+                        <ul className="flex flex-col items-center space-y-4 bg-white/30 backdrop-blur-3xl p-4 rounded-xl overflow-hidden">
                             <motion.li
                                 variants={menuItemVariants}
                                 initial="hiddenLeft"
                                 animate="visible"
-                                exit="hiddenRight"
+                                exit="hiddenLeft"
                                 className="text-black hover:bg-blue-300/30 px-3 py-2 rounded-lg"
                             >
                                 <NavLink to="/men" onClick={() => setMenuOpen(false)} className={({ isActive }) => `${isActive ? 'text-blue-600/60' : ''}`}>
@@ -151,7 +155,7 @@ const Header = () => {
                                 variants={menuItemVariants}
                                 initial="hiddenRight"
                                 animate="visible"
-                                exit="hiddenLeft"
+                                exit="hiddenUp"
                                 className="text-black hover:bg-pink-300/30 px-3 py-2 rounded-lg"
                             >
                                 <NavLink to="/women" onClick={() => setMenuOpen(false)} className={({ isActive }) => `${isActive ? 'text-pink-600/60' : ''}`}>

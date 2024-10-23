@@ -13,7 +13,15 @@ const Women = () => {
     const filteredItems = womenData.filter(item => item.category === selectedCategory);
 
     return (
-        <div className="container mx-auto py-10">
+        <div className="container  mx-auto py-10">
+          <style>
+                {`
+                    ::selection {
+                        background: pink;
+                        color: white;
+                    }
+                `}
+            </style>
             <h1 className="text-4xl font-bold mb-6">Women's Clothing</h1>
             <CategoriesList
                 categories={categories}
