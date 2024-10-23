@@ -17,7 +17,7 @@ const ItemCard = ({ item }) => {
                 to={`/item/${id}`} 
                 onClick={() => window.scrollTo(0, 0)} // Scroll to top on click
             >
-                <img src={imageUrl} alt={itemName} className="w-full h-52 rounded-3xl object-cover" />
+                <img src={imageUrl} alt={itemName} className="w-full h-64 rounded-3xl object-cover" />
                 <div className="p-4">
                     <h3 className="text-sm md:text-[0.92rem] lg:text-lg font-semibold mb-2">{itemName}</h3>
                     <p className="text-gray-700 mb-2">Price: ${price.toFixed(2)}</p>
