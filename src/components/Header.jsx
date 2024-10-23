@@ -85,14 +85,14 @@ const Header = () => {
 
     return (
         <motion.header
-            className="sticky top-1 bg-white/30 backdrop-blur-lg px-4 border-2 mt-1 mx-1 border-black rounded-xl z-10 select-none"
+            className="sticky top-1 bg-white/30 backdrop-blur-lg px-4 border-2 mt-2 mx-1 border-[#000000] rounded-xl z-10 select-none"
             variants={headerVariants} // Apply header variants
             initial="closed" // Set initial state
             animate={menuOpen ? "open" : "closed"} // Animate based on menu state
             style={{ overflow: '' }} // Prevent overflow during animation
         >
             <div className="container flex justify-between items-center">
-                <div className="text-black text-lg font-extrabold select-none">
+                <div className="text-[#F24405] text-lg font-extrabold select-none silkscreen-regular">
                     <Link to="/">DripStreet</Link>
                 </div>
                 <div className='flex justify-center items-center w-1/3'>
@@ -113,7 +113,7 @@ const Header = () => {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/cart" className={({ isActive }) => `text-black hover:bg-green-300/30 hover:backdrop-blur-3xl px-3 py-2 rounded-3xl flex items-center ${isActive ? 'text-green-600/60' : ''}`}>
+                            <NavLink to="/cart" className={({ isActive }) => `text-[#F24405] hover:bg-[#f2870555] hover:backdrop-blur-3xl px-3 py-2 rounded-3xl flex items-center ${isActive ? 'text-green-600/60' : ''}`}>
                                 <FontAwesomeIcon icon={faShoppingCart} className="mr-2" />
                                 Cart
                             </NavLink>
@@ -167,9 +167,9 @@ const Header = () => {
                                 initial="hiddenLeft"
                                 animate="visible"
                                 exit="hiddenRight"
-                                className="text-black hover:bg-green-300/30 px-3 py-2 rounded-lg flex items-center"
+                                className="text-[#F24405] hover:bg-[#f2870555] px-3 py-2 rounded-lg flex items-center"
                             >
-                                <NavLink to="/cart" onClick={() => setMenuOpen(false)} className={({ isActive }) => `${isActive ? 'text-green-600/60' : ''}`}>
+                                <NavLink to="/cart" onClick={() => setMenuOpen(false)} className={({ isActive }) => `${isActive ? 'text-[#F24405]' : ''}`}>
                                     <FontAwesomeIcon icon={faShoppingCart} className="mr-2" />
                                     Cart
                                 </NavLink>

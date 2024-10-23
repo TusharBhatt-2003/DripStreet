@@ -32,3 +32,11 @@
     background-color: rgba(255, 192, 203, 0.5); /* Light pink for women's items */
     color: black; /* Black text color */
 }
+
+body {
+    background-color: #fffffc;
+}
+
+.teko {
+    font-family: "Teko", serif;
+  }

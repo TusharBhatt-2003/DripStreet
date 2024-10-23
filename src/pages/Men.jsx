@@ -13,7 +13,7 @@ const Men = () => {
     const filteredItems = menData.filter(item => item.category === selectedCategory);
 
     return (
-        <div className="container mx-auto py-10">
+        <div className="container mx-auto py-10 px-5">
           <style>
                 {`
                     ::selection {
@@ -22,7 +22,7 @@ const Men = () => {
                     }
                 `}
             </style>
-            <h1 className="text-4xl font-bold mb-6">Men's Clothing</h1>
+            <h1 className="text-4xl font-extrabold mb-6 teko">Men's <span className='font-extralight'>Clothing</span></h1>
             <CategoriesList
                 categories={categories}
                 onSelectCategory={setSelectedCategory}

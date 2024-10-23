@@ -22,7 +22,7 @@ const SuggestionList = ({ numSuggestions = 100, excludedItems = [] }) => {
 
     return (
         <div className="flex flex-col justify-center items-center container mx-auto py-10">
-            <h2 className="text-2xl font-bold mb-6 text-center">You May Also Like</h2>
+            <h2 className="text-3xl font-bold mb-6 text-center teko text-[#F24405]">You May Also Like</h2>
             <div className="mx-5 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
                 {randomItems.map(item => (
                     <ItemCard key={item.id} item={item} />

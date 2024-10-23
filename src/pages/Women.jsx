@@ -22,13 +22,13 @@ const Women = () => {
                     }
                 `}
             </style>
-            <h1 className="text-4xl font-bold mb-6">Women's Clothing</h1>
+            <h1 className="text-4xl font-extrabold mb-6 teko">Women's <span className='font-extralight'>Clothing</span></h1>
             <CategoriesList
                 categories={categories}
                 onSelectCategory={setSelectedCategory}
                 selectedCategory={selectedCategory}
             />
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 mx-2">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mx-2">
                 {filteredItems.map(item => (
                     <ItemCard key={item.id} item={item} />
                 ))}

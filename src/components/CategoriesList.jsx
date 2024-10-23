@@ -3,14 +3,14 @@ import React from 'react';
 
 const CategoriesList = ({ categories, onSelectCategory, selectedCategory }) => {
     return (
-        <div className="flex flex-wrap space-y-2 space-x-2 mb-6 mx-2">
+        <div className="flex flex-wrap gap-1  mb-6 mx-2">
             {categories.map((category) => (
                 <button
                     key={category}
                     className={`px-2 py-1 rounded transition duration-300 ${
                         selectedCategory === category
-                            ? 'bg-zinc-700 text-white'
-                            : 'bg-zinc-200 text-gray-800 hover:bg-zinc-300'
+                            ? 'bg-[black] text-[#F2F0E4]'
+                            : 'bg-[#F2F0E4] text-[#F24405] hover:bg-zinc-300'
                     }`}
                     onClick={() => onSelectCategory(category)}
                 >
