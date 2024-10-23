@@ -1,16 +1,37 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-import { FaBars, FaTimes } from 'react-icons/fa'; // Import hamburger and close icons
-import { motion, AnimatePresence } from 'framer-motion'; // Import Framer Motion
+import { FaBars, FaTimes } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
 import Search from './Search';
 
 const Header = () => {
-    const [menuOpen, setMenuOpen] = useState(false); // State to handle mobile menu toggle
+    const [menuOpen, setMenuOpen] = useState(false);
 
     const toggleMenu = () => {
-        setMenuOpen(!menuOpen); // Toggle the menu state
+        setMenuOpen(!menuOpen);
+    };
+
+    // Header animation variants based on menu state
+    const headerVariants = {
+        open: {
+            y: 1.5,
+            height: 'auto', // Automatically adjust height when open
+            transition: {
+                type: 'spring',
+                stiffness: 100,
+                damping: 15, // Adjust damping for smoother animation
+            },
+        },
+        closed: {
+            height: '45px', // Set a fixed height when closed
+            transition: {
+                type: 'spring',
+                stiffness: 100,
+                damping: 15,
+            },
+        },
     };
 
     // Framer Motion animation variants for the menu container
@@ -24,14 +45,14 @@ const Header = () => {
             y: 0, // Move into the view
             transition: {
                 type: 'spring',
-                stiffness: 80,
-                delayChildren: 0.2, // Delay child elements (list items) to stagger their animations
-                staggerChildren: 0.2, // Stagger the appearance of list items
+                stiffness: 100,
+                delayChildren: 0.2,
+                staggerChildren: 0.2,
             },
         },
         exit: {
-            opacity: 0,
-            y: '-1vh',
+            opacity: 1,
+            y: '-10vh',
             transition: {
                 duration: 0.3,
             },
@@ -42,50 +63,56 @@ const Header = () => {
     const menuItemVariants = {
         hiddenLeft: {
             opacity: 0,
-            x: -100, // Start from left side
+            x: -200,
         },
         hiddenRight: {
             opacity: 0,
-            x: 100, // Start from right side
+            x: 200,
         },
         visible: {
             opacity: 1,
-            x: 0, // Move into the view
+            x: 0,
             transition: {
                 type: 'spring',
-                stiffness: 50,
+                stiffness: 70,
             },
         },
     };
 
     return (
-        <header className="sticky top-1 bg-white/30 backdrop-blur-lg px-4 border-2 mt-1 mx-1 border-black rounded-xl z-50">
-            <div className="container mx-auto flex justify-between items-center">
+        <motion.header
+            className="sticky top-1 bg-white/30 backdrop-blur-lg px-4 border-2 mt-1 mx-1 border-black rounded-xl z-50"
+            variants={headerVariants} // Apply header variants
+            initial="closed" // Set initial state
+            animate={menuOpen ? "open" : "closed"} // Animate based on menu state
+            style={{ overflow: 'hidden' }} // Prevent overflow during animation
+        >
+            <div className="container flex justify-between items-center">
                 <div className="text-black text-lg font-extrabold">
                     <Link to="/">DripStreet</Link>
                 </div>
                 <div className='flex justify-center items-center w-1/3'>
-                  <Search /> {/* Add the search component here */}
+                    <Search /> {/* Add the search component here */}
                 </div>
 
                 {/* Desktop Menu */}
                 <nav className="hidden md:flex">
                     <ul className="flex items-center space-x-4">
                         <li>
-                            <Link to="/men" className="text-black hover:bg-gray-100/30 hover:backdrop-blur-3xl px-3 py-2 rounded-3xl">
+                            <NavLink to="/men" className={({ isActive }) => `text-black hover:bg-blue-300/30 hover:backdrop-blur-3xl px-3 py-2 rounded-3xl ${isActive ? 'text-blue-600/60' : ''}`}>
                                 Men
-                            </Link>
+                            </NavLink>
                         </li>
                         <li>
-                            <Link to="/women" className="text-black hover:bg-gray-100/30 hover:backdrop-blur-3xl px-3 py-2 rounded-3xl">
+                            <NavLink to="/women" className={({ isActive }) => `text-black hover:bg-pink-300/30 hover:backdrop-blur-3xl px-3 py-2 rounded-3xl ${isActive ? 'text-pink-600/60' : ''}`}>
                                 Women
-                            </Link>
+                            </NavLink>
                         </li>
                         <li>
-                            <Link to="/cart" className="text-black hover:bg-gray-100/30 hover:backdrop-blur-3xl px-3 py-2 rounded-3xl flex items-center">
+                            <NavLink to="/cart" className={({ isActive }) => `text-black hover:bg-green-300/30 hover:backdrop-blur-3xl px-3 py-2 rounded-3xl flex items-center ${isActive ? 'text-green-600/60' : ''}`}>
                                 <FontAwesomeIcon icon={faShoppingCart} className="mr-2" />
                                 Cart
-                            </Link>
+                            </NavLink>
                         </li>
                     </ul>
                 </nav>
@@ -113,41 +140,41 @@ const Header = () => {
                                 variants={menuItemVariants}
                                 initial="hiddenLeft"
                                 animate="visible"
-                                exit="hiddenRight" // Use exit variant for animation
+                                exit="hiddenRight"
                                 className="text-black hover:bg-blue-300/30 px-3 py-2 rounded-lg"
                             >
-                                <Link to="/men" onClick={() => setMenuOpen(false)}>
+                                <NavLink to="/men" onClick={() => setMenuOpen(false)} className={({ isActive }) => `${isActive ? 'text-blue-600/60' : ''}`}>
                                     Men
-                                </Link>
+                                </NavLink>
                             </motion.li>
                             <motion.li
                                 variants={menuItemVariants}
                                 initial="hiddenRight"
                                 animate="visible"
-                                exit="hiddenLeft" // Use exit variant for animation
+                                exit="hiddenLeft"
                                 className="text-black hover:bg-pink-300/30 px-3 py-2 rounded-lg"
                             >
-                                <Link to="/women" onClick={() => setMenuOpen(false)}>
+                                <NavLink to="/women" onClick={() => setMenuOpen(false)} className={({ isActive }) => `${isActive ? 'text-pink-600/60' : ''}`}>
                                     Women
-                                </Link>
+                                </NavLink>
                             </motion.li>
                             <motion.li
                                 variants={menuItemVariants}
                                 initial="hiddenLeft"
                                 animate="visible"
-                                exit="hiddenRight" // Use exit variant for animation
+                                exit="hiddenRight"
                                 className="text-black hover:bg-green-300/30 px-3 py-2 rounded-lg flex items-center"
                             >
-                                <Link to="/cart" onClick={() => setMenuOpen(false)}>
+                                <NavLink to="/cart" onClick={() => setMenuOpen(false)} className={({ isActive }) => `${isActive ? 'text-green-600/60' : ''}`}>
                                     <FontAwesomeIcon icon={faShoppingCart} className="mr-2" />
                                     Cart
-                                </Link>
+                                </NavLink>
                             </motion.li>
                         </ul>
                     </motion.nav>
                 )}
             </AnimatePresence>
-        </header>
+        </motion.header>
     );
 };
 
