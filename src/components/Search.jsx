@@ -31,9 +31,9 @@ const Search = () => {
     };
 
     return (
-        <div className="relative w-full bg-transparent p-1 flex items-center">
+        <div className="relative w-full bg-transparent pb-2 flex items-center">
             {/* Search Input with Icon */}
-            <span className="absolute left-0 pl-2 text-gray-500">
+            <span className="absolute left-0 pl-2 text-black/80">
                 <FontAwesomeIcon icon={faSearch} />
             </span>
             <input
