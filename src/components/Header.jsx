@@ -53,7 +53,7 @@ const Header = () => {
 
             {/* Mobile Menu */}
             {menuOpen && (
-                <nav className="md:hidden mt-4">
+                <nav className="md:hidden my-4">
                     <ul className="flex flex-col items-center space-y-4 bg-white/30 backdrop-blur-3xl p-4 rounded-xl">
                         <li>
                             <Link to="/men" className="text-black hover:bg-blue-300/30 px-3 py-2 rounded-lg" onClick={toggleMenu}>
