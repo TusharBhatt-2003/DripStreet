@@ -1,7 +1,8 @@
 // src/components/SuggestionList.jsx
 import ItemCard from './ItemCard'; // Ensure this path is correct
 import menData from '../data/menData'; // Import men data
-import womenData from '../data/womenData';
+import womenData from '../data/womendata';
+womenData
 
 const SuggestionList = ({ numSuggestions = 100, excludedItems = [] }) => {
     // Combine both men and women data into one array
