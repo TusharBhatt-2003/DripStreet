@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { FaBars, FaTimes } from 'react-icons/fa'; // Import hamburger and close icons
-import { motion } from 'framer-motion'; // Import Framer Motion
+import { motion, AnimatePresence } from 'framer-motion'; // Import Framer Motion
 import Search from './Search';
 
 const Header = () => {
@@ -17,7 +17,7 @@ const Header = () => {
     const menuVariants = {
         hidden: {
             opacity: 0,
-            y: '-100vh', // Start from off-screen (top)
+            y: '-10vh', // Start from off-screen (top)
         },
         visible: {
             opacity: 1,
@@ -31,7 +31,7 @@ const Header = () => {
         },
         exit: {
             opacity: 0,
-            y: '-100vh',
+            y: '-1vh',
             transition: {
                 duration: 0.3,
             },
@@ -99,49 +99,54 @@ const Header = () => {
             </div>
 
             {/* Mobile Menu with Framer Motion */}
-            {menuOpen && (
-                <motion.nav
-                    className="md:hidden mt-4"
-                    initial="hidden"
-                    animate="visible"
-                    exit="exit"
-                    variants={menuVariants} // Apply the animation variants
-                >
-                    <ul className="flex flex-col items-center space-y-4 bg-white/30 backdrop-blur-3xl p-4 rounded-xl">
-                        <motion.li
-                            variants={menuItemVariants}
-                            initial="hiddenLeft"
-                            animate="visible"
-                            className="text-black hover:bg-blue-300/30 px-3 py-2 rounded-lg"
-                        >
-                            <Link to="/men" onClick={toggleMenu}>
-                                Men
-                            </Link>
-                        </motion.li>
-                        <motion.li
-                            variants={menuItemVariants}
-                            initial="hiddenRight"
-                            animate="visible"
-                            className="text-black hover:bg-pink-300/30 px-3 py-2 rounded-lg"
-                        >
-                            <Link to="/women" onClick={toggleMenu}>
-                                Women
-                            </Link>
-                        </motion.li>
-                        <motion.li
-                            variants={menuItemVariants}
-                            initial="hiddenLeft"
-                            animate="visible"
-                            className="text-black hover:bg-zinc-100/30 px-3 py-2 rounded-lg flex items-center"
-                        >
-                            <Link to="/cart" onClick={toggleMenu}>
-                                <FontAwesomeIcon icon={faShoppingCart} className="mr-2" />
-                                Cart
-                            </Link>
-                        </motion.li>
-                    </ul>
-                </motion.nav>
-            )}
+            <AnimatePresence>
+                {menuOpen && (
+                    <motion.nav
+                        className="md:hidden mt-4"
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        variants={menuVariants} // Apply the animation variants
+                    >
+                        <ul className="flex flex-col items-center space-y-4 bg-white/30 backdrop-blur-3xl p-4 rounded-xl">
+                            <motion.li
+                                variants={menuItemVariants}
+                                initial="hiddenLeft"
+                                animate="visible"
+                                exit="hiddenRight" // Use exit variant for animation
+                                className="text-black hover:bg-blue-300/30 px-3 py-2 rounded-lg"
+                            >
+                                <Link to="/men" onClick={() => setMenuOpen(false)}>
+                                    Men
+                                </Link>
+                            </motion.li>
+                            <motion.li
+                                variants={menuItemVariants}
+                                initial="hiddenRight"
+                                animate="visible"
+                                exit="hiddenLeft" // Use exit variant for animation
+                                className="text-black hover:bg-pink-300/30 px-3 py-2 rounded-lg"
+                            >
+                                <Link to="/women" onClick={() => setMenuOpen(false)}>
+                                    Women
+                                </Link>
+                            </motion.li>
+                            <motion.li
+                                variants={menuItemVariants}
+                                initial="hiddenLeft"
+                                animate="visible"
+                                exit="hiddenRight" // Use exit variant for animation
+                                className="text-black hover:bg-green-300/30 px-3 py-2 rounded-lg flex items-center"
+                            >
+                                <Link to="/cart" onClick={() => setMenuOpen(false)}>
+                                    <FontAwesomeIcon icon={faShoppingCart} className="mr-2" />
+                                    Cart
+                                </Link>
+                            </motion.li>
+                        </ul>
+                    </motion.nav>
+                )}
+            </AnimatePresence>
         </header>
     );
 };
