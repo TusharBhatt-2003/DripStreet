@@ -1,5 +1,4 @@
 // src/components/ItemCard.jsx
-import React from 'react';
 import { Link } from 'react-router-dom'; // Import Link
 import { useCart } from '../context/CartContext';
 
