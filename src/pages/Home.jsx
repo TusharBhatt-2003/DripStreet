@@ -37,7 +37,7 @@ const Home = () => {
                     ))}
                 </div>
             </div>
-            <p className="text-xl md:text-3xl font-light mt-0 md:mt-5  text-gray-700 mx-5 text-center mb-6">Your one-stop shop for the latest fashion trends.</p>
+            <p className="text-xl md:text-3xl font-light mt-0 md:mt-5  text-zinc-900 mx-5 text-center mb-6">Your one-stop shop for the latest fashion trends.</p>
             <FeaturedItems />
         </div>
     );

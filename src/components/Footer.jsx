@@ -5,7 +5,7 @@ import { faGithub, faTwitter, faLinkedin, faInstagram } from '@fortawesome/free-
 
 const Footer = () => {
     return (
-        <footer className="bg-black text-[#F2F0E4] py-6 mt-10">
+        <footer className="bg-black text-[#F2F0E4] rounded-t-3xl py-6 mt-10">
             <div className="container mx-auto text-center">
                 <div className="flex justify-center mb-4">
                     {/* Social Media Links */}
@@ -19,7 +19,7 @@ const Footer = () => {
                         <FontAwesomeIcon icon={faInstagram} className="w-6 h-6" />
                     </a>
                 </div>
-                <p className="mb-2">© {new Date().getFullYear()} Your Name. All rights reserved.</p>
+                <p className="mb-2">Designed & Developed By Tushar Bhatt © {new Date().getFullYear()}.</p>
                 <p>
                     <a href="https://github.com/TusharBhatt-2003/DripStreet" target="_blank" rel="noopener noreferrer" className="text-[#F25C05] hover:underline">
                         View Repository
