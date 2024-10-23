@@ -1,6 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* src/index.css or src/App.css */
+@import '~slick-carousel/slick/slick.css';
+@import '~slick-carousel/slick/slick-theme.css';
 
 /* Hide scrollbar */
 .scrollbar-hide {
@@ -14,7 +17,8 @@
 
 /* Global styles for text selection */
 ::selection {
-    background: black; /* Default selection background */
+    background: rgba(18, 18, 18, 0.909); /* Default selection background */
+    color: #ffffff;
 }
 
 /* For items in menData */
