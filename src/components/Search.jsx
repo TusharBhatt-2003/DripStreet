@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons'; // Import search icon
 import menData from '../data/menData'; // Import men data
-import womenData from '../data/womenData'; // Import women data
+import womenData from '../data/womendata';
+
 
 const Search = () => {
     const [searchTerm, setSearchTerm] = useState('');
