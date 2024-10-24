@@ -23,24 +23,25 @@ const PaymentConfirmation = () => {
     if (!paymentData) {
         return <div>No payment information available.</div>;
     }
-
+    
     return (
-        <div className="container mx-auto px-5 py-10">
+        <div className="container mx-auto px-5 py-10 flex flex-col items-center justify-center w-full">
             <h1 className="text-4xl font-bold mb-4">Payment Confirmation</h1>
-            <h2 className="text-2xl font-bold mb-2">Thank you for your payment!</h2>
-            <h3 className="text-lg font-semibold">Payment Method: {paymentData.selectedPaymentMethod}</h3>
-            <h3 className="text-lg font-semibold">Total Cost: ${paymentData.totalCost}</h3>
-            <h3 className="text-lg font-semibold">Delivery Address:</h3>
-            <p className="mb-4">
-                {paymentData.address.houseNumber}, {paymentData.address.streetName}, {paymentData.address.landmark}<br />
-                {paymentData.address.city}, {paymentData.address.state}, {paymentData.address.postalCode}
-            </p>
+            <h2 className="text-2xl font-light mb-2">Thank you for your payment!</h2>
+            
+            <div className='bg-[#fedcd0] flex flex-col justify-center w-[40vw] rounded-xl p-3'>
             <h3 className="text-lg font-semibold">Items:</h3>
-            <ul className="mb-4">
+            <ul className="">
                 {paymentData.items.map(item => (
-                    <li key={item.id}>{item.itemName} (x{item.quantity})</li>
+                    <ul key={item.id}>
+                    <li>{item.itemName} </li>
+                    <li>ID: {item.id}</li>
+                    <li>(x{item.quantity})</li>
+                    </ul>
                 ))}
             </ul>
+            <h3 className="text-lg font-semibold">Total Cost: <span className='font-normal'>${paymentData.totalCost}</span></h3>
+            <h3 className="text-lg font-semibold">Payment Method: <span className='font-normal uppercase'>{paymentData.selectedPaymentMethod}</span></h3>
             <h3 className="text-lg font-semibold">Payment Details:</h3>
             {/* Display relevant payment details based on method */}
             {paymentData.selectedPaymentMethod === 'creditCard' && (
@@ -59,16 +60,23 @@ const PaymentConfirmation = () => {
             {paymentData.selectedPaymentMethod === 'netBanking' && (
                 <p>Net Banking Account: {paymentData.paymentDetails.netBankingAccount}</p>
             )}
+            <h3 className="text-lg font-semibold">Delivery Address:</h3>
+            <p className="mb-4">
+                {paymentData.address.houseNumber}, {paymentData.address.streetName}, {paymentData.address.landmark}<br />
+                {paymentData.address.city}, {paymentData.address.state}, {paymentData.address.postalCode}
+            </p>
+            </div>
+
             <div className="mt-6">
                 <button
                     onClick={() => navigate('/')}
-                    className="bg-blue-500 text-white px-4 py-2 rounded mr-4"
+                    className="bg-[#fedcd0] text-[#F24405] border border-[#F24405] hover:bg-transparent px-4 py-2 rounded mr-4"
                 >
                     Go to Home
                 </button>
                 <button
                     onClick={() => navigate('/order-history')}
-                    className="bg-green-500 text-white px-4 py-2 rounded"
+                    className="px-4 py-2 bg-blue-600 text-white font-semibold rounded border hover:border-blue-600 hover:bg-blue-200 hover:text-blue-600 transition"
                 >
                     View Order History
                 </button>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import FeaturedItems from '../components/FeaturedItems';
 import './css/home.css';
+import { NavLink } from 'react-router-dom';
 const Home = () => {
     const images = [
         'https://images.beta.cosmos.so/49a9f84c-ab25-4f46-a5e0-b9904c70f048?format=jpeg',
@@ -38,6 +39,14 @@ const Home = () => {
                 </div>
             </div>
             <p className="text-xl md:text-3xl font-light mt-0 md:mt-5  text-zinc-900 mx-5 text-center mb-6">Your one-stop shop for the latest fashion trends.</p>
+            <div className='flex justify-cente  items-center w-full border-y-2 border-black md:hidden teko'>
+               <NavLink to="/men" className='border-r pt-1 text-3xl w-1/2 h-full text-center border-black'>
+                Men
+               </NavLink>   
+               <NavLink to="/women" className='border-l pt-1 text-3xl w-1/2 h-full text-center border-black'>
+                Women
+               </NavLink>          
+            </div>
             <FeaturedItems />
         </div>
     );
