@@ -113,6 +113,11 @@ const Header = () => {
                             </NavLink>
                         </li>
                         <li>
+                            <NavLink to="/order-history" className={({ isActive }) => `text-black hover:bg-green-300/30 hover:backdrop-blur-3xl px-3 py-2 rounded-3xl ${isActive ? 'text-green-600/60' : ''}`}>
+                                Order History
+                            </NavLink>
+                        </li>
+                        <li>
                             <NavLink to="/cart" className={({ isActive }) => `text-[#F24405] hover:bg-[#f2870555] hover:backdrop-blur-3xl px-3 py-2 rounded-3xl flex items-center ${isActive ? 'text-green-600/60' : ''}`}>
                                 <FontAwesomeIcon icon={faShoppingCart} className="mr-2" />
                                 Cart
@@ -160,6 +165,17 @@ const Header = () => {
                             >
                                 <NavLink to="/women" onClick={() => setMenuOpen(false)} className={({ isActive }) => `${isActive ? 'text-pink-600/60' : ''}`}>
                                     Women
+                                </NavLink>
+                            </motion.li>
+                            <motion.li
+                                variants={menuItemVariants}
+                                initial="hiddenLeft"
+                                animate="visible"
+                                exit="hiddenRight"
+                                className="text-black hover:bg-green-300/30 px-3 py-2 rounded-lg"
+                            >
+                                <NavLink to="/order-history" onClick={() => setMenuOpen(false)} className={({ isActive }) => `${isActive ? 'text-green-600/60' : ''}`}>
+                                    Order History
                                 </NavLink>
                             </motion.li>
                             <motion.li
