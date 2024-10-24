@@ -5,7 +5,7 @@ import { faGithub, faTwitter, faLinkedin, faInstagram } from '@fortawesome/free-
 
 const Footer = () => {
     return (
-        <footer className="bg-black text-[#F2F0E4] rounded-t-3xl py-6 mt-10">
+        <footer className="bottom-0 bg-black text-[#F2F0E4] rounded-t-3xl py-6 mt-10 z-[99]">
             <div className="container mx-auto text-center">
                 <div className="flex justify-center mb-4">
                     {/* Social Media Links */}

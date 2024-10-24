@@ -15,7 +15,7 @@ const ItemCard = ({ item }) => {
         <motion.div
             className="bg-[#fffdf9] rounded-xl rounded-t-3xl md:m-0 shadow-md overflow-hidden"
             whileHover={{ scale: 1.05 }} // Scale up on hover
-            whileTap={{ scale: 0.8}}
+            whileTap={{ scale: 1.05}}
             transition={{ type: 'spring', stiffness: 300 }} // Add a spring transition
         >
             <Link 

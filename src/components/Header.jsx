@@ -16,7 +16,7 @@ const Header = () => {
     // Header animation variants based on menu state
     const headerVariants = {
         open: {
-            y: 1.5,
+            y: 1,
             height: 'auto', // Automatically adjust height when open
             transition: {
                 type: 'spring',
@@ -42,10 +42,10 @@ const Header = () => {
         },
         visible: {
             opacity: 1,
-            y: 0, // Move into the view
+            y: -10, // Move into the view
             transition: {
                 type: 'spring',
-                stiffness: 100,
+                stiffness: 50,
                 delayChildren: 0.2,
                 staggerChildren: 0.2,
             },
@@ -85,7 +85,7 @@ const Header = () => {
 
     return (
         <motion.header
-            className="sticky top-1 bg-white/30 backdrop-blur-lg px-4 border-2 mt-2 mx-1 border-[#000000] rounded-xl z-10 select-none"
+            className="sticky top-1 bg-[#fffffc]  px-4 border-2 mt-2 mx-1 border-[#000000] rounded-xl z-[99] select-none"
             variants={headerVariants} // Apply header variants
             initial="closed" // Set initial state
             animate={menuOpen ? "open" : "closed"} // Animate based on menu state
@@ -139,7 +139,7 @@ const Header = () => {
                         exit="exit"
                         variants={menuVariants} // Apply the animation variants
                     >
-                        <ul className="flex flex-col items-center space-y-4 bg-white/30 backdrop-blur-3xl p-4 rounded-xl overflow-hidden">
+                        <ul className="flex flex-col items-center space-y-4 p-4 rounded-xl overflow-hidden">
                             <motion.li
                                 variants={menuItemVariants}
                                 initial="hiddenLeft"

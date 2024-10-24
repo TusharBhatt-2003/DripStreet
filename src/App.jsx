@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './pages/Home';
@@ -7,6 +6,9 @@ import Women from './pages/Women';
 import Cart from './pages/Cart';
 import ItemPage from './pages/ItemPage';
 import Favicon from './components/Favicon'; // Import the Favicon component
+import Payment from './pages/Payment';
+import PaymentConfirmation from './pages/PaymentConfiermation';
+import Footer from './components/Footer';
 
 const App = () => {
     return (
@@ -19,7 +21,10 @@ const App = () => {
                 <Route path="/women" element={<Women />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/item/:id" element={<ItemPage />} />
+                <Route path='/payment' element={<Payment />} />
+                <Route path='/payment-confirmation' element={<PaymentConfirmation />} />
             </Routes>
+            <Footer />
         </Router>
     );
 };
