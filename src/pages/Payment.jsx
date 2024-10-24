@@ -29,9 +29,9 @@ const PaymentDetailsForm = ({ method, details, onChange }) => {
                     <div className='flex flex-col justify-center'>
                         <h3 className="text-lg font-semibold mb-4">Credit Card Details</h3>
                         <div className='flex flex-col items-center justify-center p-2'>
-                            <input type="text" name="cardNumber" placeholder="Card Number" value={details.cardNumber} onChange={onChange} className="border-b bg-transparent px-1 mb-2 w-fit" />
-                            <input type="text" name="cardExpiry" placeholder="MM/YY" value={details.cardExpiry} onChange={onChange} className="border-b bg-transparent px-1 mb-2 w-fit" />
-                            <input type="text" name="cardCVC" placeholder="CVC" value={details.cardCVC} onChange={onChange} className="border-b bg-transparent px-1 w-fit" />
+                            <input type="text" name="cardNumber" placeholder="Card Number" value={details.cardNumber} onChange={onChange} className="border-b bg-transparent px-1 mb-2 w-fit outline-none focus:border-b-black placeholder:text-zinc-500" />
+                            <input type="text" name="cardExpiry" placeholder="MM/YY" value={details.cardExpiry} onChange={onChange} className="border-b bg-transparent px-1 mb-2 w-fit outline-none focus:border-b-black placeholder:text-zinc-500" />
+                            <input type="text" name="cardCVC" placeholder="CVC" value={details.cardCVC} onChange={onChange} className="border-b bg-transparent px-1 w-fit outline-none focus:border-b-black placeholder:text-zinc-500" />
                         </div>
                     </div>
                 );
@@ -39,21 +39,21 @@ const PaymentDetailsForm = ({ method, details, onChange }) => {
                 return (
                     <>
                         <h3 className="text-lg font-semibold mb-4">UPI ID</h3>
-                        <input type="text" name="upiId" placeholder="Enter UPI ID" value={details.upiId} onChange={onChange} className="border-b bg-transparent px-1 mb-2 w-full" />
+                        <input type="text" name="upiId" placeholder="Enter UPI ID" value={details.upiId} onChange={onChange} className="border-b bg-transparent px-1 mb-2 w-full outline-none focus:border-b-black placeholder:text-zinc-500" />
                     </>
                 );
             case 'cashOnDelivery':
                 return (
                     <>
                         <h3 className="text-lg font-semibold mb-4">Cash Amount</h3>
-                        <input type="number" name="cashAmount" placeholder="Enter Amount" value={details.cashAmount} onChange={onChange} className="border-b bg-transparent px-1 mb-2 w-full" />
+                        <input type="number" name="cashAmount" placeholder="Enter Amount" value={details.cashAmount} onChange={onChange} className="border-b bg-transparent px-1 mb-2 w-full outline-none focus:border-b-black placeholder:text-zinc-500" />
                     </>
                 );
             case 'netBanking':
                 return (
                     <>
                         <h3 className="text-lg font-semibold mb-4">Net Banking Account</h3>
-                        <input type="text" name="netBankingAccount" placeholder="Enter Account Number" value={details.netBankingAccount} onChange={onChange} className="border-b bg-transparent px-1 mb-2 w-full" />
+                        <input type="text" name="netBankingAccount" placeholder="Enter Account Number" value={details.netBankingAccount} onChange={onChange} className="border-b bg-transparent px-1 mb-2 w-full outline-none focus:border-b-black placeholder:text-zinc-500" />
                     </>
                 );
             default:
@@ -67,7 +67,7 @@ const PaymentDetailsForm = ({ method, details, onChange }) => {
 const Payment = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { address, totalCost, items } = location.state || {};
+    const { totalCost, items } = location.state || {};
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
     const [paymentDetails, setPaymentDetails] = useState({
         cardNumber: '',
@@ -80,6 +80,14 @@ const Payment = () => {
 
     const [dialogOpen, setDialogOpen] = useState(false);
     const [dialogMessage, setDialogMessage] = useState('');
+    const [address, setAddress] = useState({
+        houseNumber: '',
+        streetName: '',
+        landmark: '',
+        city: '',
+        state: '',
+        postalCode: '',
+    });
 
     const handlePaymentMethodChange = (event) => {
         setSelectedPaymentMethod(event.target.value);
@@ -94,6 +102,12 @@ const Payment = () => {
     };
 
     const handleMockPayment = () => {
+        if (!address.houseNumber) {
+            setDialogMessage("Please enter your delivery address before proceeding with the payment.");
+            setDialogOpen(true);
+            return;
+        }
+    
         const paymentData = {
             method: selectedPaymentMethod,
             totalCost: totalCost,
@@ -101,20 +115,29 @@ const Payment = () => {
             address: address,
             paymentDetails: paymentDetails,
         };
-
-        console.log("Processing payment...", paymentData);
-        
-        // Simulating payment processing
+    
+        // Get the current order history from localStorage
+        const storedOrders = JSON.parse(localStorage.getItem('orderHistory')) || [];
+    
+        // Add the new order to the history
+        const updatedOrders = [...storedOrders, paymentData];
+    
+        // Save the updated order history back to localStorage
+        localStorage.setItem('orderHistory', JSON.stringify(updatedOrders));
+    
+        // Simulate payment processing
         setTimeout(() => {
-            navigate('/payment-confirmation', { state: { paymentData } });
-
-            // Setting dialog message and opening the dialog
             setDialogMessage("Payment successful! Thank you for your order.");
-            setDialogOpen(true); // This should trigger the dialog to open
-
-            // Log to check if we reached this point
-            console.log("Dialog Open State:", true);
+            setDialogOpen(true);
         }, 2000);
+    };
+    
+    const closeDialog = () => {
+        setDialogOpen(false);
+        // After closing the dialog, navigate to the confirmation page if payment was successful
+        if (dialogMessage === "Payment successful! Thank you for your order.") {
+            navigate('/payment-confirmation', { state: { paymentData: { selectedPaymentMethod, totalCost, items, address, paymentDetails } } });
+        }
     };
 
     return (
@@ -124,20 +147,34 @@ const Payment = () => {
             {items && items.length > 0 ? (
                 <div className="mb-4">
                     {items.map(item => (
-                        <div key={item.id} className="flex justify-between mb-2">
+                        <div key={item.id} className="flex justify-between border-b border-zinc-200 mb-2">
                             <span>{item.itemName} (x{item.quantity})</span>
                             <span>${(item.price * item.quantity).toFixed(2)}</span>
                         </div>
                     ))}
-                    <hr className="my-4" />
+                    <div className="my-4 h-[2px] rounded-full bg-black" />
                     <div className="flex justify-between font-bold">
                         <span>Total Cost:</span>
                         <span>${totalCost}</span>
                     </div>
+                    <div className="my-4 h-[1.7px] rounded-full bg-black" />
                 </div>
             ) : (
                 <p className="text-red-500">No items in your order.</p>
             )}
+
+   {/* Delivery Address */}
+   <div className="mt-8">
+                <h2 className="text-2xl font-bold mb-4">Delivery Address</h2>
+                <div className="flex flex-col mb-4">
+                    <input type="text" placeholder="House Number" value={address.houseNumber} onChange={(e) => setAddress({ ...address, houseNumber: e.target.value })} className="border-b mb-2 outline-none focus:border-b-black placeholder:text-zinc-500" />
+                    <input type="text" placeholder="Street Name" value={address.streetName} onChange={(e) => setAddress({ ...address, streetName: e.target.value })} className="border-b mb-2 outline-none focus:border-b-black placeholder:text-zinc-500" />
+                    <input type="text" placeholder="Landmark" value={address.landmark} onChange={(e) => setAddress({ ...address, landmark: e.target.value })} className="border-b mb-2 outline-none focus:border-b-black placeholder:text-zinc-500" />
+                    <input type="text" placeholder="City" value={address.city} onChange={(e) => setAddress({ ...address, city: e.target.value })} className="border-b mb-2 outline-none focus:border-b-black placeholder:text-zinc-500" />
+                    <input type="text" placeholder="State" value={address.state} onChange={(e) => setAddress({ ...address, state: e.target.value })} className="border-b mb-2 outline-none focus:border-b-black placeholder:text-zinc-500" />
+                    <input type="text" placeholder="Postal Code" value={address.postalCode} onChange={(e) => setAddress({ ...address, postalCode: e.target.value })} className="border-b mb-2 outline-none focus:border-b-black placeholder:text-zinc-500" />
+                </div>
+            </div>
 
             <div className="mt-10 py-5 flex flex-col md:flex-row md:justify-evenly justify-center items-center rounded-xl border-2 border-black">
                 <div className='flex flex-col justify-center items-center'>
@@ -167,25 +204,12 @@ const Payment = () => {
                 </div>
             </div>
 
-            {/* Delivery Address */}
-            <div className="mt-8">
-                <h2 className="text-2xl font-bold mb-4">Delivery Address</h2>
-                {address ? (
-                    <div>
-                        <p>{address.name}</p>
-                        <p>{address.street}</p>
-                        <p>{address.city}, {address.state} {address.zip}</p>
-                        <p>{address.country}</p>
-                    </div>
-                ) : (
-                    <p className="text-red-500">No delivery address provided.</p>
-                )}
-            </div>
+         
 
             {/* Dialog Component */}
             <Dialog 
                 isOpen={dialogOpen} 
-                onClose={() => setDialogOpen(false)} 
+                onClose={closeDialog} // Close dialog and navigate to confirmation
                 title="Payment Status" 
                 message={dialogMessage} 
             />

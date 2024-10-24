@@ -9,6 +9,7 @@ import Favicon from './components/Favicon'; // Import the Favicon component
 import Payment from './pages/Payment';
 import PaymentConfirmation from './pages/PaymentConfiermation';
 import Footer from './components/Footer';
+import OrderHistory from './pages/OrderHistory';
 
 const App = () => {
     return (
@@ -23,6 +24,7 @@ const App = () => {
                 <Route path="/item/:id" element={<ItemPage />} />
                 <Route path='/payment' element={<Payment />} />
                 <Route path='/payment-confirmation' element={<PaymentConfirmation />} />
+                <Route path="/order-history" element={<OrderHistory />} />
             </Routes>
             <Footer />
         </Router>

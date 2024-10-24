@@ -8,17 +8,6 @@ const Cart = () => {
     const { items } = state;
     const navigate = useNavigate(); // Initialize the useNavigate hook
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [deliveryAddress, setDeliveryAddress] = useState('');
-
-    // Delivery address fields
-    const [houseNumber, setHouseNumber] = useState('');
-    const [streetName, setStreetName] = useState('');
-    const [landmark, setLandmark] = useState('');
-    const [city, setCity] = useState('');
-    const [stateAddress, setStateAddress] = useState('');
-    const [postalCode, setPostalCode] = useState('');
-
     const [dialogOpen, setDialogOpen] = useState(false);
     const [dialogMessage, setDialogMessage] = useState('');
 
@@ -37,29 +26,8 @@ const Cart = () => {
     };
 
     const handleMakeOrder = () => {
-        setIsModalOpen(true); // Open the modal
-    };
-
-    const handleProceedToPayment = () => {
-        const address = {
-            houseNumber,
-            streetName,
-            landmark,
-            city,
-            stateAddress,
-            postalCode
-        };
-
-        // Check if all address fields are filled
-        if (!houseNumber || !streetName || !city || !stateAddress || !postalCode) {
-            setDialogMessage("Please fill in all the required address fields."); // Set dialog message
-            setDialogOpen(true); // Open the dialog
-            return; // Prevent proceeding to payment
-        }
-
-        console.log('Delivery Address:', address);
-        setIsModalOpen(false); // Close modal
-        navigate('/payment', { state: { address, totalCost, items } }); // Redirect with address, total cost, and items
+        // Here, we can directly navigate to the payment page since there are no address fields
+        navigate('/payment', { state: { totalCost, items } }); // Redirect with total cost and items
     };
 
     return (
@@ -115,89 +83,11 @@ const Cart = () => {
                 </>
             )}
 
-            {/* Modal for Address Form */}
-            {isModalOpen && (
-                <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
-                    <div className="bg-[#fffffc] border-2 border-black rounded-lg mt-2 overflow-auto scrollbar-hide px-3 py-2">
-                        <h2 className="text-lg font-bold mb-2">Enter Delivery Address</h2>
-
-                        <label className="block text-sm mb-1">House Number:</label>
-                        <input
-                            type="text"
-                            value={houseNumber}
-                            onChange={(e) => setHouseNumber(e.target.value)}
-                            className="w-full border border-black p-1 mb-2 rounded focus:outline-none"
-                            placeholder="Enter your house number"
-                        />
-
-                        <label className="block text-sm mb-1">Street Name:</label>
-                        <input
-                            type="text"
-                            value={streetName}
-                            onChange={(e) => setStreetName(e.target.value)}
-                            className="w-full border border-black p-1 mb-2 rounded focus:outline-none"
-                            placeholder="Enter your street name"
-                        />
-
-                        <label className="block text-sm mb-1">Landmark:</label>
-                        <input
-                            type="text"
-                            value={landmark}
-                            onChange={(e) => setLandmark(e.target.value)}
-                            className="w-full border border-black p-1 mb-2 rounded focus:outline-none"
-                            placeholder="Enter a nearby landmark"
-                        />
-
-                        <label className="block text-sm mb-1">City:</label>
-                        <input
-                            type="text"
-                            value={city}
-                            onChange={(e) => setCity(e.target.value)}
-                            className="w-full border border-black p-1 mb-2 rounded focus:outline-none"
-                            placeholder="Enter your city"
-                        />
-
-                        <label className="block text-sm mb-1">State:</label>
-                        <input
-                            type="text"
-                            value={stateAddress}
-                            onChange={(e) => setStateAddress(e.target.value)}
-                            className="w-full border border-black p-1 mb-2 rounded focus:outline-none"
-                            placeholder="Enter your state"
-                        />
-
-                        <label className="block text-sm mb-1">Postal Code:</label>
-                        <input
-                            type="text"
-                            value={postalCode}
-                            onChange={(e) => setPostalCode(e.target.value)}
-                            className="w-full border border-black p-1 mb-2 rounded focus:outline-none"
-                            placeholder="Enter your postal code"
-                        />
-
-                        <div className="flex mt-2 justify-end">
-                            <button
-                                className="px-2 py-1 bg-gray-300 text-gray-800 rounded mr-2"
-                                onClick={() => setIsModalOpen(false)} // Close modal on cancel
-                            >
-                                Cancel
-                            </button>
-                            <button
-                                className="px-2 py-1 bg-green-600 text-white font-semibold rounded border hover:border-green-600 hover:bg-green-200 hover:text-green-600 transition"
-                                onClick={handleProceedToPayment} // Proceed to payment page
-                            >
-                                Proceed to Payment
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
-
             {/* Dialog for Address Error */}
             <Dialog 
                 isOpen={dialogOpen} 
                 onClose={() => setDialogOpen(false)} 
-                title="Address Required" 
+                title="Error" 
                 message={dialogMessage} 
             />
         </div>
