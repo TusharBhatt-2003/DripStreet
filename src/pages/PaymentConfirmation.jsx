@@ -58,7 +58,7 @@ const PaymentConfirmation = () => {
             <h1 className="text-4xl font-bold mb-4">Payment Confirmation</h1>
             <h2 className="text-2xl font-light mb-2">Thank you for your payment!</h2>
 
-            <div className='flex border border-black border-dashed flex-col justify-center w-[40vw] rounded-xl p-3'>
+            <div className='flex border border-black border-dashed flex-col justify-center w-[70vw] lg:w-[40vw] rounded-xl p-3'>
                 {/* Display Order ID and Date/Time */}
                 <h3 className="text-lg font-semibold mb-2">Order ID: {generateOrderDetails().orderId}</h3>
                 <p className="text-sm text-gray-600 mb-4">Order Date & Time: {generateOrderDetails().orderDateTime}</p>
@@ -105,7 +105,7 @@ const PaymentConfirmation = () => {
                 </p>
             </div>
 
-            <div className="mt-6">
+            <div className="mt-6 flex">
                 <button
                     onClick={() => navigate('/')}
                     className="bg-[#fedcd0] text-[#F24405] border border-[#F24405] hover:bg-transparent px-4 py-2 rounded mr-4"
