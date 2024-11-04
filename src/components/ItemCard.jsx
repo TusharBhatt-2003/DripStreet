@@ -2,20 +2,29 @@
 import { Link } from 'react-router-dom'; // Import Link
 import { useCart } from '../context/CartContext';
 import { motion } from 'framer-motion'; // Import Framer Motion
+import { useState, useEffect } from 'react'; // Import useState and useEffect
 
 const ItemCard = ({ item }) => {
     const { itemName, price, imageUrl, itemsInStock, id } = item; // Destructure id
-    const { dispatch } = useCart(); // Access the dispatch method from the CartContext
+    const { state, dispatch } = useCart(); // Access the cart state and dispatch method from the CartContext
+    const [inCart, setInCart] = useState(false); // Track if the item is in the cart
+
+    // Check if the item is already in the cart when the component mounts
+    useEffect(() => {
+        const foundInCart = state.items.some(cartItem => cartItem.id === id);
+        setInCart(foundInCart);
+    }, [state.items, id]);
 
     const handleAddToCart = () => {
         dispatch({ type: 'ADD_ITEM', payload: item }); // Dispatch the add item action
+        setInCart(true); // Set the item as added to the cart
     };
 
     return (
         <motion.div
             className="bg-[#fffdf9] rounded-xl rounded-t-3xl md:m-0 shadow-md overflow-hidden"
             whileHover={{ scale: 1.05 }} // Scale up on hover
-            whileTap={{ scale: 1.05}}
+            whileTap={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 300 }} // Add a spring transition
         >
             <Link 
@@ -31,13 +40,24 @@ const ItemCard = ({ item }) => {
                     </p>
                 </div>
             </Link>
-            <button
-                className={`w-full px-4 py-2 text-white select-none ${itemsInStock > 0 ? 'bg-black hover:bg-zinc-700' : 'bg-gray-400 cursor-not-allowed'}`}
-                onClick={itemsInStock > 0 ? handleAddToCart : null}
-                disabled={itemsInStock === 0}
-            >
-                Add to Cart
-            </button>
+
+            {/* Conditional Button Rendering */}
+            {inCart ? (
+                <Link
+                    to="/cart" // Link to the cart page
+                    className="w-full px-4 py-2 bg-[#F24405] text-white text-center block hover:bg-[#ffb195] hover:text-[#F24405]"
+                >
+                    View in Cart
+                </Link>
+            ) : (
+                <button
+                    className={`w-full px-4 py-2 text-white select-none ${itemsInStock > 0 ? 'bg-black hover:bg-zinc-700' : 'bg-gray-400 cursor-not-allowed'}`}
+                    onClick={itemsInStock > 0 ? handleAddToCart : null}
+                    disabled={itemsInStock === 0}
+                >
+                    Add to Cart
+                </button>
+            )}
         </motion.div>
     );
 };
