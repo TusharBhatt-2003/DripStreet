@@ -25,8 +25,8 @@ const OrderHistory = () => {
     };
 
     // Function to handle viewing a specific item
-    const handleViewItem = (itemID) => {
-        navigate(`/item/${itemID}`); // Navigate to the item page (assuming `/item/:id` route exists)
+    const handleViewItem = (id) => {
+        navigate(`/item/${id}`); // Navigate to the item page (assuming `/item/:id` route exists)
     };
 
     return (
@@ -40,35 +40,47 @@ const OrderHistory = () => {
                     >
                         Clear All History
                     </button>
-                    <div className='flex flex-col justify-center md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-5 items-center'>
+                    <div className='flex flex-wrap md:gap-5 items-center'>
                         {orders.map((order, index) => (
-                            <div key={index} className="mb-6 h-full w-full border-black border-2 rounded-xl p-4">
-                                <h2 className="text-2xl border-b border-slate-900 font-semibold mb-2">Order {index + 1}</h2>
-                                <p><strong>Payment Method:</strong> {order.selectedPaymentMethod}</p>
-                                <p><strong>Total Cost:</strong> ${order.totalCost}</p>
-                                <h3 className="text-lg font-semibold">Delivery Address:</h3>
-                                <p>{order.address.houseNumber}, {order.address.streetName}, {order.address.landmark}, {order.address.city}, {order.address.state}, {order.address.postalCode}</p>
-                                <h3 className="text-lg font-semibold">Items:</h3>
-                                <ul className='bg-[#fedcd0] w-fit p-2 rounded-lg'>
-                                    {order.items.map((item, idx) => (
-                                        <li key={idx} className='flex justify-between'>
-                                            {item.itemName} (x{item.quantity})
-                                            <button
-                                                onClick={() => handleViewItem(item.itemId)} // Assuming each item has an `itemId`
-                                                className="text-sm text-blue-500 underline ml-4"
-                                            >
-                                                View Item
-                                            </button>
-                                        </li>
-                                    ))}
-                                </ul>
-                                <button
-                                    onClick={() => handleDeleteOrder(index)}
-                                    className="mt-4 py-2 px-4 bg-red-500 text-white rounded-lg hover:bg-red-700"
-                                >
-                                    Delete Order
-                                </button>
-                            </div>
+                            // Conditionally render the entire div if order.id is not null
+                            order.id && (
+                                <div key={index} className="mb-6 h-fit w-fit border-black border-2 rounded-xl p-4">
+                                    <h2 className="text-2xl border-b border-dashed border-slate-900 font-semibold mb-2">
+                                        Order ID: {order.id}
+                                    </h2>
+                                    {/* Display Date & Time of the order */}
+                                    <p><strong>Order Date & Time:</strong> {order.dateTime}</p>
+                                    <p><strong>Payment Method:</strong> {order.selectedPaymentMethod}</p>
+                                    <p><strong>Total Cost:</strong> ${order.totalCost}</p>
+                                    <h3 className="text-lg font-semibold">Delivery Address:</h3>
+                                    <p>{order.address.houseNumber}, {order.address.streetName}, {order.address.landmark}, {order.address.city}, {order.address.state}, {order.address.postalCode}</p>
+                                    <h3 className="text-lg font-semibold">Items:</h3>
+                                    <ul className='flex flex-wrap gap-2'>
+                                        {order.items.map((item, id) => (
+                                            <li key={id} className=''>
+                                                {/* Display the item name and ID */}
+                                                <ul className='border flex flex-col items-start border-black border-dashed w-fit h-fit p-2 rounded-lg'>
+                                                    <li>{item.itemName}</li>
+                                                    <li>ID: {item.id}</li>
+                                                    <li>Quantity: {item.quantity}</li>
+                                                    <button
+                                                        onClick={() => handleViewItem(item.id)} // Assuming each item has an `itemId`
+                                                        className="text-sm flex flex-col items-start px-2 py-1 mt-2 bg-black text-white rounded-md"
+                                                    >
+                                                        View Item
+                                                    </button>
+                                                </ul>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <button
+                                        onClick={() => handleDeleteOrder(index)}
+                                        className="mt-4 py-2 px-4 bg-red-500 text-white rounded-lg hover:bg-red-700"
+                                    >
+                                        Delete Order
+                                    </button>
+                                </div>
+                            )
                         ))}
                     </div>
                 </>

@@ -1,14 +1,15 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react'; // Import useState
 import { useParams } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import menData from '../data/menData';
 import womenData from '../data/womendata';
 import SuggestionList from '../components/SuggestionList';
-import { motion } from 'framer-motion'; // Import Framer Motion
+import { motion } from 'framer-motion';
 
 const ItemPage = () => {
     const { id } = useParams(); // Get the item ID from the URL
     const { dispatch } = useCart();
+    const [addedToCart, setAddedToCart] = useState(false); // State for cart message
 
     // Scroll to the top of the page when the component mounts
     useEffect(() => {
@@ -25,7 +26,7 @@ const ItemPage = () => {
     // Determine the source of the item
     const itemSource = menItem ? 'Men' : womenItem ? 'Women' : null;
 
-    // Sample reviews (this should ideally come from your data or API)
+    // Sample reviews
     const reviews = [
         { id: 1, user: 'John Doe', comment: 'Great quality!', rating: 5 },
         { id: 2, user: 'Jane Smith', comment: 'Very comfortable.', rating: 4 },
@@ -34,10 +35,14 @@ const ItemPage = () => {
 
     const handleAddToCart = () => {
         dispatch({ type: 'ADD_ITEM', payload: item });
+        setAddedToCart(true); // Display the "Added to cart" message
+        setTimeout(() => {
+            setAddedToCart(false); // Hide the message after 2 seconds
+        }, 2000);
     };
 
     if (!item) {
-        return <div className="text-center mt-10">Item not found.</div>; // Handle item not found
+        return <div className="text-center mt-10">Item not found.</div>;
     }
 
     return (
@@ -68,7 +73,7 @@ const ItemPage = () => {
                             {item.itemsInStock > 0 ? `${item.itemsInStock} in stock` : 'Out of stock'}
                         </p>
                         <motion.button
-                             whileTap={{ scale: 0.9}}
+                             whileTap={{ scale: 0.9 }}
                              transition={{ type: 'spring', stiffness: 200 }}
                             className={`mt-4 px-4 py-2 text-white rounded ${item.itemsInStock > 0 ? 'bg-black hover:bg-zinc-700' : 'bg-gray-400 cursor-not-allowed'}`}
                             onClick={item.itemsInStock > 0 ? handleAddToCart : null}
@@ -76,6 +81,8 @@ const ItemPage = () => {
                         >
                             Add to Cart
                         </motion.button>
+                        {/* Display the "Added to cart" message */}
+                        {addedToCart && <p className="text-green-500 mt-2">Item added to cart!</p>}
                     </div>
                     <div className="mt-10">
                         <h3 className="text-2xl font-bold">Reviews</h3>
@@ -97,10 +104,9 @@ const ItemPage = () => {
             </div>
             {/* Suggestions List */}
             <div className="mt-10">
-                <SuggestionList numSuggestions={5} excludedItems={[item.id]} />
+                <SuggestionList numSuggestions={10} excludedItems={[item.id]} itemSource={itemSource} />
             </div>
 
-            {/* Display the source of the item */}
             <div className="mt-4 text-gray-500">
                 {itemSource ? `This item is from the ${itemSource} collection.` : 'This item is not found in any collection.'}
             </div>

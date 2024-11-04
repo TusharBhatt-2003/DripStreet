@@ -1,15 +1,14 @@
 // src/components/SuggestionList.jsx
-import ItemCard from './ItemCard'; // Ensure this path is correct
-import menData from '../data/menData'; // Import men data
+import ItemCard from './ItemCard';
+import menData from '../data/menData';
 import womenData from '../data/womendata';
-womenData
 
-const SuggestionList = ({ numSuggestions = 100, excludedItems = [] }) => {
-    // Combine both men and women data into one array
-    const allItems = [...menData, ...womenData];
+const SuggestionList = ({ numSuggestions = 100, excludedItems = [], itemSource }) => {
+    // Filter items based on the itemSource ('Men' or 'Women')
+    const relevantItems = itemSource === 'Men' ? menData : womenData;
 
     // Filter out excluded items
-    const filteredItems = allItems.filter(item => !excludedItems.includes(item.id));
+    const filteredItems = relevantItems.filter(item => !excludedItems.includes(item.id));
 
     // Function to get random items
     const getRandomItems = (array, num) => {
@@ -27,9 +26,9 @@ const SuggestionList = ({ numSuggestions = 100, excludedItems = [] }) => {
                 {randomItems.map(item => (
                     <ItemCard key={item.id} item={item} />
                 ))}
-            </div>  
+            </div>
         </div>
     );
 };
-       
+
 export default SuggestionList;
